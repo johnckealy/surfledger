@@ -1,0 +1,16 @@
+name: surfledger
+
+channels:
+  - conda-forge
+
+dependencies:
+  - django
+  - gunicorn
+  - pygrib
+  - pip
+  - pip:
+    - psycopg2
+    - django-widget-tweaks
+    - first
+    - selenium
+    - python-dotenv
