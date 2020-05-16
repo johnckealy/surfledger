@@ -14,3 +14,4 @@ dependencies:
     - first
     - selenium
     - python-dotenv
+    - pip install wget
