@@ -36,23 +36,21 @@ def download_gribs(leadtime_hrs=48, forecast_interval_hrs=3):
                 except:
                     print("Unable to attain file. ")
 
-        breakpoint()            
-        if len(downloaded_files) > 0 and len(downloaded_files) < int(leadtime_hrs/forecast_interval_hrs):
-            print("Only {} files were downloaded".format(len(downloaded_files)))
-            return "No new files"
-        elif len(downloaded_files) > 0:
-            print("No files have been downloaded".format(len(downloaded_files)))
-            return "Retry"
-        else:
+        # breakpoint()
+        if len(downloaded_files) > 0 and len(downloaded_files) == int((leadtime_hrs+forecast_interval_hrs)/forecast_interval_hrs):
             print('All files downloaded okay')
             return "Okay"
+        elif len(downloaded_files) > 0 and len(downloaded_files) < int((leadtime_hrs+forecast_interval_hrs)/forecast_interval_hrs):
+            print("Only {} files were downloaded".format(len(downloaded_files)))
+            return "Retry"
         return ""
 
+    return "No new files"
 
 
 def run():
 
-    leadtime_hrs = 12
+    leadtime_hrs = 6
     forecast_interval_hrs = 3
 
     result = download_gribs(leadtime_hrs=leadtime_hrs, forecast_interval_hrs=forecast_interval_hrs)

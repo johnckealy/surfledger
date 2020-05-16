@@ -1,6 +1,6 @@
 import pygrib
 from datetime import datetime as dt
-# from matplotlib import pyplot as plt
+import os
 import numpy as np
 import pytz
 from scipy import spatial
@@ -9,6 +9,13 @@ from first import first
 import warnings
 from glob import glob
 import re
+
+
+
+
+GRIBFILES_PATH = '/home/jokea/code/surfledger/dataapi/Gribfiles/'
+
+
 
 
 def find_gridpoint(lons, lats, lonpoint, latpoint, data):
@@ -92,7 +99,6 @@ def read_grib(filepath):
     iterate_spots(grbs, 'Wind direction', 'wind_dir', level=1)
 
 
-GRIBFILES_PATH = '/home/jokea/code/surfledger/dataapi/Gribfiles/'
 
 
 
@@ -117,5 +123,6 @@ def process_gribs(leadtime_hrs, forecast_interval_hrs):
         if glob_filename in expected_gribfiles:
             print("Opening " + glob_filename)
             read_grib(glob_filename)
+            os.remove(glob_filename)
 
-    print("Completed in {}".format((dt.now() - start).total_seconds()))
+    print("Completed in {} s".format((dt.now() - start).total_seconds()))
