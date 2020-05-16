@@ -1,0 +1,38 @@
+[
+    {
+       "model": "dataapi.spot",
+       "pk": 1,
+       "fields": {
+           "name": "Strandhill",
+           "latitude": 54.272045,
+           "longitude": -8.616457,
+           "description": "A sandy bottom, beginner to medium difficulty",
+           "region": "Co. Sligo",
+           "country": "Ireland"
+        }
+    },
+    {
+       "model": "dataapi.spot",
+       "pk": 2,
+       "fields": {
+           "name": "Batu Bolong (Old man's)",
+           "latitude": -8.660026,
+           "longitude": 115.129465,
+           "description": "Consistent break, part sandy part reef; beginner to medium difficulty",
+           "region": "Bali",
+           "country": "Indonesia"
+        }
+    },
+    {
+       "model": "dataapi.spot",
+       "pk": 3,
+       "fields": {
+           "name": "Nazaré",
+           "latitude": 39.597630,
+           "longitude": -9.087752,
+           "description": "So big I could shit myself just thinking about it.",
+           "region": "Nazaré",
+           "country": "Portugal"
+        }
+    }
+]

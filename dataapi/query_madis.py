@@ -3,6 +3,7 @@ from datetime import datetime as dt
 from matplotlib import pyplot as plt
 import numpy as np
 from scipy import spatial
+from models import Spot
 
 
 
@@ -24,36 +25,43 @@ def find_gridpoint(lons, lats, lonpoint, latpoint, data):
     raise ValueError('Couldn\'t find a result. The point is too far from the ocean. ')
 
 
-
 def read_grib(filepath, wave):
+    """
+    """
     grbs = pygrib.open(filepath)
 
-    wave['sig_ht_comb'].append(grbs.select(name='Significant height of combined wind waves and swell')[0])
-    wave['prim_wave_period'].append(grbs.select(name='Primary wave mean period')[0])
-    wave['prim_wave_dir'].append(grbs.select(name='Primary wave direction')[0])
-    wave['sig_ht_windwaves'].append(grbs.select(name='Significant height of wind waves')[0])
-    wave['sig_ht_swellwaves1'].append(grbs.select(name='Significant height of swell waves', level=1)[0])
-    wave['sig_ht_swellwaves2'].append(grbs.select(name='Significant height of swell waves', level=2)[0])
-    wave['mean_windwave_period'].append(grbs.select(name='Mean period of wind waves')[0])
-    wave['mean_swellwave_period1'].append(grbs.select(name='Mean period of swell waves', level=1)[0])
-    wave['mean_swellwave_period2'].append(grbs.select(name='Mean period of swell waves', level=2)[0])
-    wave['windwave_dir'].append(grbs.select(name='Direction of wind waves')[0])
-    wave['swellwave1_dir'].append(grbs.select(name='Direction of swell waves', level=1)[0])
-    wave['swellwave2_dir'].append(grbs.select(name='Direction of swell waves', level=2)[0])
-
-    # Canngu, Bali coords
-    spot_lon = 115.133193
-    spot_lat = -8.656691
     sig_ht_comb = grbs.select(name='Significant height of combined wind waves and swell')[0]
-
-    lats = np.array(sig_ht_comb.latlons()[0])
     lons = np.array(sig_ht_comb.latlons()[1])
+    lats = np.array(sig_ht_comb.latlons()[0])
     data = np.array(sig_ht_comb.data()[0])
+    for spot in Spot.objects.all():
+        print(spot)
+        spot_lon = spot['longitude']
+        spot_lat = spot['latitude']
+        index = find_gridpoint(lons, lats, spot_lon, spot_lat, data)
 
-    result = find_gridpoint(lons, lats, spot_lon, spot_lat, data)
+    return  data[index]
 
 
-    return wave
+
+
+    # wave['sig_ht_comb'].append()
+    # wave['prim_wave_period'].append(grbs.select(name='Primary wave mean period')[0])
+    # wave['prim_wave_dir'].append(grbs.select(name='Primary wave direction')[0])
+    # wave['sig_ht_windwaves'].append(grbs.select(name='Significant height of wind waves')[0])
+    # wave['sig_ht_swellwaves1'].append(grbs.select(name='Significant height of swell waves', level=1)[0])
+    # wave['sig_ht_swellwaves2'].append(grbs.select(name='Significant height of swell waves', level=2)[0])
+    # wave['mean_windwave_period'].append(grbs.select(name='Mean period of wind waves')[0])
+    # wave['mean_swellwave_period1'].append(grbs.select(name='Mean period of swell waves', level=1)[0])
+    # wave['mean_swellwave_period2'].append(grbs.select(name='Mean period of swell waves', level=2)[0])
+    # wave['windwave_dir'].append(grbs.select(name='Direction of wind waves')[0])
+    # wave['swellwave1_dir'].append(grbs.select(name='Direction of swell waves', level=1)[0])
+    # wave['swellwave2_dir'].append(grbs.select(name='Direction of swell waves', level=2)[0])
+    # # Canngu, Bali coords
+    # spot_lon = 115.133193
+    # spot_lat = -8.656691
+    # sig_ht_comb = grbs.select(name='Significant height of combined wind waves and swell')[0]
+    # return wave
 
 
 
