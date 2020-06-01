@@ -1,9 +1,11 @@
 from django.test import TestCase
-from .query_madis import find_gridpoint
+from scripts.process_gribs import find_gridpoint, process_gribs, iterate_spots, get_data
 import os
 from django.conf import settings
 import pygrib
 import numpy as np
+from .models import Spot, Forecast
+from datetime import datetime
 # from django.test import LiveServerTestCase
 # from selenium import webdriver
 # from selenium.webdriver.common.keys import Keys
@@ -42,3 +44,23 @@ class GribQueryTests(TestCase):
         result = find_gridpoint(self.lons, self.lats, spot_lon, spot_lat, self.data)
 
         self.assertEqual((self.lats[result], self.lons[result]), (15.5, -97.0+360))
+
+
+
+
+class GribDownloadTests(TestCase):
+    fixtures = ["spots.json"]
+
+    def setUp(self):
+        self.grbs = pygrib.open(os.path.join(settings.BASE_DIR, 'dataapi/test_gribfiles/samplef000.grib'))
+
+    def tearDown(self):
+        self.grbs.close()
+
+    def test_get_data(self):
+        ref_time, valid_time, lons, lats, data = get_data(self.grbs, name='Significant height of wind waves', level=1)
+        self.assertIsInstance(ref_time, datetime)
+        self.assertIsInstance(valid_time, datetime)
+        self.assertEqual(lons[200,200], 100.0)
+        self.assertEqual(lats[200,200], -22.5)
+        self.assertEqual(data[200,200], 1.49)

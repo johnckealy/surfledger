@@ -26,6 +26,7 @@ def find_gridpoint(lons, lats, lonpoint, latpoint, data):
     lonpoint = (lonpoint +360) if (lonpoint < 0) else lonpoint
     lonlats = np.array(list(zip(lons.flatten(), lats.flatten())))
 
+
     _, index = spatial.KDTree(lonlats).query([lonpoint, latpoint], k=100)
     for point in index:
         glat = lats[ lats==lonlats[point][1] ][0]
@@ -34,7 +35,6 @@ def find_gridpoint(lons, lats, lonpoint, latpoint, data):
         coords = idx[0][0], idx[1][0]
         if data[coords] != 9999:
             return coords
-    raise ValueError('Couldn\'t find a result. The point is too far from the ocean.')
 
 
 def get_data(grbs, name, level):
@@ -64,7 +64,10 @@ def iterate_spots(grbs, name, dbfield, level=1):
         if dbfield == 'sig_ht_comb':  # only apply the valid time to the first field, preventing duplicates
             forecast.valid_times.append(valid_time)
         index = find_gridpoint(lons, lats, float(spot_lon), float(spot_lat), data)
-        getattr(forecast, dbfield).append(data[index])
+        if index:
+            getattr(forecast, dbfield).append(data[index])
+        else:
+            getattr(forecast, dbfield).append(None)
         forecast.save()
 
 
@@ -119,10 +122,17 @@ def process_gribs(leadtime_hrs, forecast_interval_hrs):
         tplus = str(tplus).zfill(3)
         expected_gribfiles.append(GRIBFILES_PATH+"wavefile_{}{}-f{}.grib2".format(date, ref_time, tplus))
 
-    for glob_filename in glob(GRIBFILES_PATH+"*.grib2"):
-        if glob_filename in expected_gribfiles:
-            print("Opening " + glob_filename)
-            read_grib(glob_filename)
-            os.remove(glob_filename)
+    gribfiles = glob(GRIBFILES_PATH+"*.grib2")
+    for gribfile in expected_gribfiles:
+        if gribfile in gribfiles:
+            print("Opening " + gribfile)
+            read_grib(gribfile)
+
 
     print("Completed in {} s".format((dt.now() - start).total_seconds()))
+
+
+
+
+# def run():
+#     process_gribs(6, 3)

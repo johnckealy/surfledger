@@ -18,6 +18,7 @@ load_dotenv()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -43,9 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dataapi.apps.DataapiConfig',
+    'rest_framework',
     "widget_tweaks",
     'django_extensions',
+    'dataapi.apps.DataapiConfig',
 ]
 
 MIDDLEWARE = [

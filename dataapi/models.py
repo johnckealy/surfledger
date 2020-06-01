@@ -40,4 +40,27 @@ class Forecast(models.Model):
     spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "id: {}\n    spot_id: {}\n    reference_time: {}\n    valid_times: {}\n    sig_ht_comb: {}\n".format(self.id, self.spot.id, self.reference_time, self.valid_times, self.sig_ht_comb)
+        return "\n\nForecast ----------------------------------------------\n \
+         id: {}\n \
+         spot_id: {}\n \
+         reference_time: {}\n \
+         valid_times: {}\n \
+         sig_ht_comb: {}\n \
+         prim_wave_period: {}\n \
+         prim_wave_dir: {}\n \
+         sig_ht_windwaves: {}\n \
+         sig_ht_swellwaves1: {}\n \
+         sig_ht_swellwaves2: {}\n \
+         mean_windwave_period: {}\n \
+         mean_swellwave_period1: {}\n \
+         mean_swellwave_period2: {}\n \
+         windwave_dir: {}\n \
+         swellwave1_dir: {}\n \
+         swellwave2_dir: {}\n \
+         wind_speed: {}\n \
+         wind_dir: {}\n \
+         ".format(self.id, self.spot.id, self.reference_time, self.valid_times, self.sig_ht_comb,
+         self.prim_wave_period, self.prim_wave_dir, self.sig_ht_windwaves, self.sig_ht_swellwaves1,
+         self.sig_ht_swellwaves2, self.mean_windwave_period, self.mean_swellwave_period1,
+         self.mean_swellwave_period2, self.windwave_dir, self.swellwave1_dir, self.windwave_dir,
+         self.swellwave1_dir, self.swellwave2_dir, self.wind_speed, self.wind_dir,)

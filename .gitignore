@@ -113,3 +113,4 @@ deleteme.py
 deleteme.txt
 dataapi/test_gribfiles/*
 tmp/*
+dataapi/Gribfiles/*.grib2
