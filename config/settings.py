@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
     'django_extensions',
     'dataapi.apps.DataapiConfig',
+    'ledger'
 ]
 
 MIDDLEWARE = [
@@ -61,6 +62,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+
+print('###########################', os.path.join(BASE_DIR, "templates"))
 
 TEMPLATES = [
     {
