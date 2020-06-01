@@ -114,3 +114,4 @@ deleteme.txt
 dataapi/test_gribfiles/*
 tmp/*
 dataapi/Gribfiles/*.grib2
+ledger/static/ledger/compiled_assets/*
