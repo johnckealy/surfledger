@@ -10,9 +10,10 @@ dependencies:
   - pip
   - pip:
     - djangorestframework
-    - psycopg2
+    - django-webpack-loader 
     - django-widget-tweaks
+    - psycopg2
     - first
     - selenium
     - python-dotenv
-    - pip install wget
+    - wget

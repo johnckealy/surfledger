@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'webpack_loader',
     "widget_tweaks",
     'django_extensions',
     'dataapi.apps.DataapiConfig',
@@ -63,7 +64,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
-print('###########################', os.path.join(BASE_DIR, "templates"))
 
 TEMPLATES = [
     {
@@ -137,3 +137,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'ledger/compiled_assets/', # must end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}
