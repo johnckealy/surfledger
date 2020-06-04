@@ -9,6 +9,7 @@ class AutoComplete {
         this.query = '';
         this.max_results = options.max_results;
         this.key = options.key;
+        
         if (options.secondary_key) {
             this.secondary_key = options.secondary_key;
         } else {
@@ -26,6 +27,7 @@ class AutoComplete {
     }
 
     async fetchData(api_endpoint) {
+        // Grab data from an API specified in the options
         let data = await fetch(api_endpoint)
                             .then(response => {
                                 if (!response.ok) throw new Error('Unable to retrieve the autocomplete data from the server.');
@@ -44,14 +46,18 @@ class AutoComplete {
             let list = rgx.exec(dta[this.key]+dta[this.secondary_key]);
             return list;
         });
-        let result = spots.sort(() => {
-            return spots.index;
-        })
-        return result;   
+    
+        var result = spots.sort((a, b) => {
+            if (query == a.name.toLowerCase().slice(0, query.length) )  return 1;  
+            else return -1
+         });
+         
+
+        return result.reverse();   
     }
 
     appendToDOM(items) {
-        // add the autocomplete list items to the DOM
+        // add the autocomplete list of items to the DOM
         const ul = document.createElement("ul"); 
         ul.id = "ulist";
 
@@ -77,6 +83,7 @@ class AutoComplete {
     }
 
     removeULfromDOM() {
+        // remove the list of autocomple items from the DOM
         const ul = document.getElementById("ulist"); 
         if (ul) {
             ul.remove();
@@ -84,6 +91,7 @@ class AutoComplete {
     }
 
     incrementActiveItem(anchors, direction) {
+        // when using the keyboard, move the active item up or down
         let current;
         for (let i=0; i<anchors.length; i++) {
             if (anchors[i].classList.contains('active')) {
@@ -163,7 +171,6 @@ class AutoComplete {
             }
         })
 
-
         this.form.onblur = this.removeULfromDOM;
         const parentThis = this;
         this.input.onfocus = function (e) {
@@ -172,11 +179,7 @@ class AutoComplete {
                 if (Array.isArray(items) && items.length > 0) { parentThis.appendToDOM(items); }
             }
         }
-
-
-
     }
 }
-
 
 export { AutoComplete }
