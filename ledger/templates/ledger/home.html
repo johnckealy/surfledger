@@ -1,27 +1,28 @@
 {% load render_bundle from webpack_loader %}
 {% load webpack_static from webpack_loader %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surf Ledger</title>
+    <title>Surf Ledger | Remember the best surf conditions</title>
     {% render_bundle 'main' 'css' 'DEFAULT' %}
 </head>
 <body>
 
-    <div class="container">
+    <div id="home-container"class="container-fluid">
         <div class="justify-content-center d-flex">
-            <div class="">
-                <h1>Finally...</h1>
-                <img src="{% webpack_static 'jpg'  %}"/>
-                <form id=autocomplete-wrapper method="get" action="">
-
-                    <input  id="autocomplete" type="text"  autocomplete="off" placeholder="Find your surf break... ">
-                </form>
-            </div>
+            <form id=autocomplete-wrapper method="get" action="">
+                <input  id="autocomplete" type="text"  autocomplete="off" placeholder="Find your surf break... ">
+            </form>
         </div>
     </div>
+
+    <div class="container">
+        <h1>Some other content</h1>
+    </div>
+
 
     {% render_bundle 'main' 'js' 'DEFAULT' %}
     <script>
