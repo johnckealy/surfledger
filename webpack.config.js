@@ -8,7 +8,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   context: __dirname,
-  entry: './ledger/static/ledger/js/index.js',
+  entry: {
+     main: ['@babel/polyfill', './ledger/static/ledger/js/index.js']
+  },
 
   output: {
     path: path.resolve('./ledger/static/ledger/compiled_assets/'),
@@ -97,7 +99,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new BundleTracker({filename: './webpack-stats.json'}),
     new MiniCssExtractPlugin({
-        filename: "style-[hash].css"
+        filename: "application-[hash].css"
     })
   ],
   mode: 'development'

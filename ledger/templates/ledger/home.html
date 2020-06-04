@@ -1,5 +1,5 @@
 {% load render_bundle from webpack_loader %}
-
+{% load webpack_static from webpack_loader %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +14,11 @@
         <div class="justify-content-center d-flex">
             <div class="">
                 <h1>Finally...</h1>
-                <input  id="autoComplete"> 
+                <img src="{% webpack_static 'jpg'  %}"/>
+                <form id=autocomplete-wrapper method="get" action="">
+
+                    <input  id="autocomplete" type="text"  autocomplete="off" placeholder="Find your surf break... ">
+                </form>
             </div>
         </div>
     </div>
