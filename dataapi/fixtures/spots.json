@@ -34,5 +34,41 @@
            "region": "Nazaré",
            "country": "Portugal"
         }
-    }
+    },
+    {
+       "model": "dataapi.spot",
+       "pk": 4,
+       "fields": {
+           "name": "Imperial Beach",
+           "latitude": 32.568168, 
+           "longitude": -117.135932,
+           "description": "Breaks over sand. Prevailing easterly wind.",
+           "region": "San Diego",
+           "country": "USA"
+        }
+    },
+    {
+        "model": "dataapi.spot",
+        "pk": 5,
+        "fields": {
+            "name": "Coronado Beach",
+            "latitude": 32.682454,
+            "longitude": -117.192490,
+            "description": "Breaks over sand.",
+            "region": "San Diego",
+            "country": "USA"
+         }
+     },
+     {
+        "model": "dataapi.spot",
+        "pk": 6,
+        "fields": {
+            "name": "Kirra",
+            "latitude": -28.163064, 
+            "longitude": 153.527701,
+            "description": "Point Break right. Breaks over sand.",
+            "region": "Gold Coast",
+            "country": "Australia"
+         }
+     }
 ]

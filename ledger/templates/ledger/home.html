@@ -13,8 +13,9 @@
 
     <div id="home-container"class="container-fluid">
         <div class="justify-content-center d-flex">
-            <form id=autocomplete-wrapper method="get" action="">
-                <input  id="autocomplete" type="text"  autocomplete="off" placeholder="Find your surf break... ">
+            <form id=autocomplete-wrapper method="get" action="/search">
+                <input id="autocomplete" type="text"  autocomplete="off" placeholder="Find your surf break... ">
+                <input id="id-field" name="spotid" type="hidden" >
             </form>
         </div>
     </div>
@@ -25,8 +26,5 @@
 
 
     {% render_bundle 'main' 'js' 'DEFAULT' %}
-    <script>
-
-    </script>
 </body>
 </html>
