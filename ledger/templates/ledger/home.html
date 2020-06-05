@@ -1,15 +1,7 @@
-{% load render_bundle from webpack_loader %}
-{% load webpack_static from webpack_loader %}
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surf Ledger | Remember the best surf conditions</title>
-    {% render_bundle 'main' 'css' 'DEFAULT' %}
-</head>
-<body>
+{% extends 'ledger/base.html' %}
+
+
+{% block content %}
 
     <div id="home-container"class="container-fluid">
         <div class="justify-content-center d-flex">
@@ -24,7 +16,4 @@
         <h1>Some other content</h1>
     </div>
 
-
-    {% render_bundle 'main' 'js' 'DEFAULT' %}
-</body>
-</html>
+{% endblock %}

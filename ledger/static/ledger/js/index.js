@@ -1,9 +1,13 @@
 import '../scss/application.scss';
 import '../images/homepage_wave.jpg';
-// import 'bootstrap';
+import 'bootstrap';
 import { AutoComplete } from './plugins/autosearch.js';
+import { navbarJS} from './plugins/navbar.js';
 
 console.log("Hello from webpack!");
+
+
+
 
 
 new AutoComplete({

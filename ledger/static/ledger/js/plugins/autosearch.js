@@ -79,7 +79,7 @@ class AutoComplete {
             acItem.focus();
         })
         this.input.after(ul);
-        ul.getElementsByTagName('a')[0].classList.add('active')
+        ul.getElementsByTagName('a')[0].classList.add('ac-active')
     }
 
     removeULfromDOM() {
@@ -94,24 +94,24 @@ class AutoComplete {
         // when using the keyboard, move the active item up or down
         let current;
         for (let i=0; i<anchors.length; i++) {
-            if (anchors[i].classList.contains('active')) {
-                anchors[i].classList.remove('active')   
+            if (anchors[i].classList.contains('ac-active')) {
+                anchors[i].classList.remove('ac-active')   
                 if (direction == 'down') {
                     if (anchors[i] == anchors[anchors.length-1]) {
                         current = anchors[0]
-                        current.classList.add('active');
+                        current.classList.add('ac-active');
                     } else {
                         current = anchors[i].nextElementSibling
-                        current.classList.add('active');
+                        current.classList.add('ac-active');
                     }
                     this.input.value =  current.firstChild.innerText                    
                 } else if (direction == 'up') {
                     if (anchors[i] == anchors[0]) {
                         current = anchors[anchors.length-1]
-                        current.classList.add('active');
+                        current.classList.add('ac-active');
                     } else {
                         current = anchors[i].previousElementSibling
-                        current.classList.add('active');
+                        current.classList.add('ac-active');
                     }
                     this.input.value =  current.firstChild.innerText    
                 }
@@ -154,7 +154,7 @@ class AutoComplete {
             if (e.key == "Enter") {
                 e.preventDefault();
                 try {
-                    let activeElement = document.getElementsByClassName('active')[0]                
+                    let activeElement = document.getElementsByClassName('ac-active')[0]                
                     this.hiddenInput.value = activeElement.dataset.spotId;
                     this.form.submit();
                 }
