@@ -26,7 +26,7 @@ def download_gribs(leadtime_hrs=48, forecast_interval_hrs=3):
     the desired analysis time, it starts trying to find the files."""
 
     now = dt.utcnow()
-    now = dt(2020, 6, 1, 11,14)
+    now = dt(2020, 6, 12, 13,14)
     base_hours = [0, 6, 12, 18]
 
     x = [ now.hour-base_hour  for base_hour in base_hours ]

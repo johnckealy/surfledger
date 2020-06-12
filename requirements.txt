@@ -1,0 +1,11 @@
+django
+djangorestframework
+django-widget-tweaks
+django-webpack-loader 
+django-cors-headers
+django-extensions
+gunicorn
+psycopg2-binary
+python-dotenv
+scipy
+selenium

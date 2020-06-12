@@ -13,5 +13,7 @@ def search(request):
         spotid = int(request.GET['spotid'])
         print(spotid)
         spot = Spot.objects.get(pk=spotid)
-        ref_time = spot.forecast_set.first().reference_time
-    return render(request,'ledger/spot_detail.html',{'spot': ref_time})
+        
+        # breakpoint()
+        forecast = spot.forecast_set.order_by('-reference_time')
+    return render(request,'ledger/spot_detail.html',{'spot': spot, 'forecast': forecast})
